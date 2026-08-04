@@ -3,23 +3,7 @@
 
 ---
 
-## 🏗️ Architectural Overview
 
-```text
-+---------------------+         HTTP / JSON Request         +-----------------------+
-|  AI Agent / Client  | ----------------------------------> |     FastAPI Server    |
-+---------------------+                                     +-----------------------+
-                                                                        |
-                                       +--------------------------------+--------------------------------+
-                                       |                                |                                |
-                                       v                                v                                v
-                             [ GET /logfile ]                  [ POST /toolname ]              [ POST /executetool ]
-                                       |                                |                                |
-                                       v                                v                                v
-                              Reads config.json                Validates Data Types            Dynamic Runtime Import
-                            (Centralized Registry)             & Parameter Schemas             & Function Execution
-
-```
 ## 📂 Core Components & Implementation
 1. Modular Tool Tracing (@trace_tool): use this decoratore over any function and track logs ,file path, arguments.
 ```python
@@ -28,12 +12,16 @@ def add(a, b):
     """this is an arithmetic addition tool"""
     return a + b
 ```
+
+
 2. Log Writing Utility (writelogs)
 The system captures and writes out the active registry configurations dynamically using utility handlers like writelogs(toolregistry, filename) to keep the JSON schema synchronized:
 
 ```Python
 writelogs(toolregistry, filename)
 ```
+
+
 3. Centralized Tool Registry (config.json)
 The system decouples tool execution logic from the application core by utilizing a structured JSON configuration registry. Each entry defines the module, absolute storage path, and arguments just like an mcp configuration.json :
 
@@ -55,6 +43,8 @@ The system decouples tool execution logic from the application core by utilizing
   }
 ]
 ```
+
+
 4. FastAPI Endpoint & Execution Engine (main.py)
 The server dynamically manages file loading, runtime argument typing (type(args[i]).__name__), and execution loops:
 
@@ -66,9 +56,31 @@ POST /executetool: Handles dynamic module imports at runtime and executes functi
 
 
 
+## 🏗️ Architectural Overview
+
+```text
++---------------------+         HTTP / JSON Request         +-----------------------+
+|  AI Agent / Client  | ----------------------------------> |     FastAPI Server    |
++---------------------+                                     +-----------------------+
+                                                                        |
+                                       +--------------------------------+--------------------------------+
+                                       |                                |                                |
+                                       v                                v                                v
+                             [ GET /logfile ]                  [ POST /toolname ]              [ POST /executetool ]
+                                       |                                |                                |
+                                       v                                v                                v
+                              Reads config.json                Validates Data Types            Dynamic Runtime Import
+                            (Centralized Registry)             & Parameter Schemas             & Function Execution
+
+```
+
+
+
+
 ## ⚖️ Architecture Comparison: Claude Desktop vs. LCDEP
 
-Here is the short and crisp architecture similarity comparison:
+
+
 
 | Feature | Claude Desktop MCP Server | LCDEP (Your Architecture) |
 | --- | --- | --- |
@@ -76,6 +88,39 @@ Here is the short and crisp architecture similarity comparison:
 | **Modular Isolation** | Runs independent local processes/scripts to keep tools decoupled from the core app. | Keeps each tool isolated in modular Python files (`.py`) for clean runtime imports. |
 | **Standardized Protocol** | Uses standardized transport protocols (JSON-RPC) for client-server communication. | Uses a FastAPI-driven protocol (`/logfile`, `/toolname`, `/executetool`) for validation and execution. |
 | **Ecosystem Agonistic** |Tied to Claude ecosystem | Open & universal—bridges OpenAI, Gemini, or custom multi-agent workflows |
+
+
+## Endpoint,Method,Description
+/,GET,Health check & engine status verification
+/logfile,GET,Retrieves active tool registry configurations
+/toolname,POST,Resolves specific tool chunks and inspects argument data types
+/executetool,POST,Triggers dynamic script execution and returns processed results
+
+
+## 💡 Dual Use Cases
+Internal SuperAgent Tool Registry: Directly integrates into local agent loops as an MCP-style tool registry using dynamically generated JSON configurations.
+
+External HTTP Protocol Access: Exposes a clean FastAPI wrapper (/logfile, /toolname, /executetool) allowing external clients and systems to discover, validate, and execute local tools via HTTP requests.
+
+## 🛠️ Setup & Running Locally
+Clone the repository:
+
+```Bash
+git clone [https://github.com/your-username/lightweight-claude-desktop-engine-protocol.git](https://github.com/your-username/lightweight-claude-desktop-engine-protocol.git)
+cd lightweight-claude-desktop-engine-protocol
+```
+
+Install dependencies:
+
+```Bash
+pip install fastapi uvicorn pydantic
+```
+
+Run the server:
+
+```Bash
+uvicorn main:app --reload
+```
 
 
 
