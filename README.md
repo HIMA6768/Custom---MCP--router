@@ -12,7 +12,7 @@ def add(a, b):
     """this is an arithmetic addition tool"""
     return a + b
 ```
-
+---
 
 2. Log Writing Utility (writelogs)
 The system captures and writes out the active registry configurations dynamically using utility handlers like writelogs(toolregistry, filename) to keep the JSON schema synchronized:
@@ -20,7 +20,7 @@ The system captures and writes out the active registry configurations dynamicall
 ```Python
 writelogs(toolregistry, filename)
 ```
-
+---
 
 3. Centralized Tool Registry (config.json)
 The system decouples tool execution logic from the application core by utilizing a structured JSON configuration registry. Each entry defines the module, absolute storage path, and arguments just like an mcp configuration.json :
@@ -43,7 +43,7 @@ The system decouples tool execution logic from the application core by utilizing
   }
 ]
 ```
-
+---
 
 4. FastAPI Endpoint & Execution Engine (main.py)
 The server dynamically manages file loading, runtime argument typing (type(args[i]).__name__), and execution loops:
@@ -54,7 +54,7 @@ POST /toolname: Evaluates targeted tool chunks, inspects parameter types, and st
 
 POST /executetool: Handles dynamic module imports at runtime and executes functions safely with unpacked arguments.
 
-
+---
 
 ## 🏗️ Architectural Overview
 
@@ -74,7 +74,7 @@ POST /executetool: Handles dynamic module imports at runtime and executes functi
 
 ```
 
-
+---
 
 
 ## ⚖️ Architecture Comparison: Claude Desktop vs. LCDEP
@@ -90,13 +90,16 @@ POST /executetool: Handles dynamic module imports at runtime and executes functi
 | **Ecosystem Agonistic** |Tied to Claude ecosystem | Open & universal—bridges OpenAI, Gemini, or custom multi-agent workflows |
 
 
-## Endpoint,Method,Description
-/,GET,Health check & engine status verification
-/logfile,GET,Retrieves active tool registry configurations
-/toolname,POST,Resolves specific tool chunks and inspects argument data types
-/executetool,POST,Triggers dynamic script execution and returns processed results
+---
 
+##| Endpoint | Method | Description |
+| :--- | :--- | :--- |
+| `/` | `GET` | Health check & engine status verification |
+| `/logfile` | `GET` | Retrieves active tool registry configurations |
+| `/toolname` | `POST` | Resolves specific tool chunks and inspects argument data types |
+| `/executetool` | `POST` | Triggers dynamic script execution and returns processed results |
 
+---
 ## 💡 Dual Use Cases
 Internal SuperAgent Tool Registry: Directly integrates into local agent loops as an MCP-style tool registry using dynamically generated JSON configurations.
 
@@ -122,6 +125,19 @@ Run the server:
 uvicorn main:app --reload
 ```
 
+
+---
+
+## 🏁 Conclusion
+
+The **Lightweight Claude Desktop Engine Protocol (LCDEP)** bridges the gap between complex multi-agent system orchestration and lightweight local execution. By replicating the core principles of the Model Context Protocol without heavy transport overhead, LCDEP empowers developers to build modular, self-registering, and deeply integrated tool ecosystems for SuperAgents.
+
+---
+
+## 👨‍💻 Creator & Maintainer
+
+* **Created by:** Himadri
+* **Project Focus:** Multi-Agent Systems (MAS), Agentic AI Workflows, and Local Execution Runtimes.
 
 
 
