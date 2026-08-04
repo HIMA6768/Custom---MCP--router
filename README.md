@@ -1,6 +1,6 @@
 <div align="center">
 
-# Lightweight Claude Desktop Engine Protocol (LCDEP)
+## Custom MCP Router
 
 [![Python Version](https://img.shields.io/badge/python-3.10%2B-blue.svg)](https://www.python.org/)
 [![Architecture: MCP-Replica](https://img.shields.io/badge/architecture-MCP%20Replica-orange.svg)]()
