@@ -7,7 +7,7 @@
 
 </div>
 
-**Lightweight Claude Desktop Engine Protocol (LCDEP)** is a drop-in replica of the core Model Context Protocol (MCP) server execution loop. It dynamically generates and reads JSON configurations to function as an autonomous tool registry for SuperAgents—while remaining fully accessible and remotely triggerable via high-performance HTTP endpoints.
+**Custom MCP Router** is a  Light weight drop-in replica of the core Model Context Protocol (MCP) server execution loop. It dynamically generates and reads JSON configurations to function as an autonomous tool registry for SuperAgents—while remaining fully accessible and remotely triggerable via high-performance HTTP endpoints specially designed for custom mcp servers and localized edge ai.
 
 ---
 
@@ -81,22 +81,6 @@ POST /executetool: Handles dynamic module imports at runtime and executes functi
                             (Centralized Registry)             & Parameter Schemas             & Function Execution
 
 ```
-
----
-
-
-## ⚖️ Architecture Comparison: Claude Desktop vs. LCDEP
-
-
-
-
-| Feature | Claude Desktop MCP Server | LCDEP (Your Architecture) |
-| --- | --- | --- |
-| **Configuration-Driven Discovery** | Uses local JSON configs to discover and map external tool servers. | Uses a centralized `config.json` registry to dynamically map local modules, paths, and arguments. |
-| **Modular Isolation** | Runs independent local processes/scripts to keep tools decoupled from the core app. | Keeps each tool isolated in modular Python files (`.py`) for clean runtime imports. |
-| **Standardized Protocol** | Uses standardized transport protocols (JSON-RPC) for client-server communication. | Uses a FastAPI-driven protocol (`/logfile`, `/toolname`, `/executetool`) for validation and execution. |
-| **Ecosystem Agonistic** |Tied to Claude ecosystem | Open & universal—bridges OpenAI, Gemini, or custom multi-agent workflows |
-
 
 ---
 
