@@ -1,4 +1,14 @@
-# Lightweight-Claude-Desktop-Engine-Protocol-LCDEP-
+<div align="center">
+
+# Lightweight Claude Desktop Engine Protocol (LCDEP)
+
+[![Python Version](https://img.shields.io/badge/python-3.10%2B-blue.svg)](https://www.python.org/)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+[![Status: Active](https://img.shields.io/badge/status-active-success.svg)]()
+[![Architecture: MCP-Replica](https://img.shields.io/badge/architecture-MCP%20Replica-orange.svg)]()
+
+</div>
+
 **Lightweight Claude Desktop Engine Protocol (LCDEP)** is a drop-in replica of the core Model Context Protocol (MCP) server execution loop. It dynamically generates and reads JSON configurations to function as an autonomous tool registry for SuperAgents—while remaining fully accessible and remotely triggerable via high-performance HTTP endpoints.
 
 ---
