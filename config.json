@@ -1,0 +1,21 @@
+[
+    {
+        "name": "add",
+        "description": "this is  an arithmetic addition tool",
+        "module": "additiontool.py",
+        "path": "c:\\Users\\HIMADRI\\Desktop\\mas evaluation system\\environment",
+        "arguments": [
+            3,
+            2
+        ]
+    },
+    {
+        "name": "web_mas",
+        "description": "this is a web researcher tool",
+        "module": "testmultiagentsystem.py",
+        "path": "c:\\Users\\HIMADRI\\Desktop\\mas evaluation system\\environment",
+        "arguments": [
+            "tell me about tajmahal"
+        ]
+    }
+]
